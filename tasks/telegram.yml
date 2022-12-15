@@ -1,0 +1,37 @@
+- name: Get latest telegram-notification script version
+  get_url:
+    url: https://raw.githubusercontent.com/belgotux/telegram-notification-linux/main/telegram-notification.sh
+    dest: '{{local_bin}}/telegram-notification.sh'
+    mode: 0775
+  notify: Test notification telegram
+
+- name: install dependances
+  apt:
+    pkg: curl
+    state: present
+
+- name: Call the api to get xml response with chat ID
+  uri:
+    url: https://api.telegram.org/bot{{notification_telegram_access_token}}/getUpdates
+    body_format: json
+    return_content: yes
+  register: notification_raw_xml_chat_id
+  failed_when: "'chat' not in notification_raw_xml_chat_id.content"
+  when: notification_telegram_chat_id is not defined
+
+#- debug: var=notification_raw_xml_chat_id
+
+- name: Parse json to get the chat ID
+  set_fact:
+    notification_telegram_chat_id: "{{notification_raw_xml_chat_id.json| json_query('result[0].message.chat.id')}}"
+  when: notification_telegram_chat_id is not defined
+
+- debug: msg="Chat ID {{notification_telegram_chat_id}}"
+
+- name: Put telegram-notification config file
+  template:
+    src: telegram-notification.conf.j2
+    dest: "{{local_etc}}/telegram-notification.conf"
+    mode: 0664
+  notify: Test notification telegram
+

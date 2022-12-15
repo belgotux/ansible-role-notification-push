@@ -1,0 +1,7 @@
+---
+- name: Test notification pushbullet
+  shell: pushbullet.sh "test title" "test message"
+  changed_when: false
+- name: Test notification telegram
+  shell: telegram-notification.sh -t test -m test
+  changed_when: false

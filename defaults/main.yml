@@ -1,0 +1,8 @@
+---
+# defaults file for notification
+
+local_bin: /usr/local/bin
+local_etc: /usr/local/etc
+
+notification_telegram_provider_api: 'https://api.telegram.org'
+notification_pushbullet_provider_api: 'https://api.pushbullet.com/v2/pushes'

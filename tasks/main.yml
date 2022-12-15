@@ -1,0 +1,7 @@
+---
+- import_tasks: telegram.yml
+  when: notification_telegram_access_token is defined
+  tags: [telegram]
+- import_tasks: pushbullet.yml
+  when: notification_pushbullet_access_token is defined
+  tags: [pushbullet]
