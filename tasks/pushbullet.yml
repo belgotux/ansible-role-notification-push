@@ -1,7 +1,7 @@
 - name: Get latest pushbullet script version
   get_url:
     url: https://raw.githubusercontent.com/belgotux/pushbullet-notification-linux/master/pushbullet.sh
-    dest: '{{local_bin}}/pushbullet.sh'
+    dest: '{{- local_bin }}/pushbullet.sh'
     mode: 0775
   notify: Test notification pushbullet
 - name: install dependances
@@ -11,6 +11,6 @@
 - name: Put pushbullet config file
   template:
     src: pushbullet.conf.j2
-    dest: "{{local_bin}}/pushbullet.conf"
+    dest: "{{ local_bin }}/pushbullet.conf"
     mode: 0664
   notify: Test notification pushbullet
