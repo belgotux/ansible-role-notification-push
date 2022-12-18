@@ -1,7 +1,7 @@
 galaxy_info:
   role_name: notification_push
   author: belgotux
-  description: Role to create traefik proxy on docker
+  description: Deploy one or more push notification scripts with Pushbullet or Telegram
   license: GPL-3.0-or-later
 
   min_ansible_version: '2.1'
@@ -16,4 +16,5 @@ galaxy_info:
 
   galaxy_tags: 
   - telegram
+  - pushbullet
   - notification
