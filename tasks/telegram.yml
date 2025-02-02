@@ -14,7 +14,7 @@
   uri:
     url: https://api.telegram.org/bot{{ notification_telegram_access_token }}/getUpdates
     body_format: json
-    return_content: yes
+    return_content: true
   register: notification_raw_xml_chat_id
   failed_when: "'chat' not in notification_raw_xml_chat_id.content"
   when: notification_telegram_chat_id is not defined
